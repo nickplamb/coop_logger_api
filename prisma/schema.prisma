@@ -1,0 +1,26 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model LoggedData {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  humidity1 Int
+  tempF1    Int
+  humidity2 Int
+  tempF2    Int
+  doorLock  Boolean
+  battery   String   @db.VarChar(255)
+}
+
+// api_key humidity_1 tempF_1 humidity_2 tempF_2 door_locked battery
